@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-barra-nagevation',
@@ -9,6 +10,9 @@ export class BarraNagevationComponent implements OnInit {
   isLoggedIn = false;
   showAdminBoard = false;
   username: string = "";
+
+  constructor(private router: Router) {    
+  }
 
   pedidosPendientes() : number{
     return 5;
@@ -21,7 +25,11 @@ export class BarraNagevationComponent implements OnInit {
     else if(this.username != '') this.isLoggedIn = true;
   }
 
-  logout(): void {
-    localStorage.removeItem("userLogged")
+  logout() {
+    localStorage.removeItem('userLogged');
+    localStorage.removeItem('clienteId');
+    localStorage.removeItem('carrito');
+    localStorage.removeItem('nombre');
+    this.router.navigate([''])
   }
 }

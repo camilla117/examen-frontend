@@ -2,6 +2,13 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.2.16.
 
+## Configuracion de administrador
+Para acceder a las opciones de administrador, es necesario que en login accedan con las credenciales:
+usuario: `admin`
+password: `admin`
+Esto les permitira poder modificar las secciones de articulos, clientes y tiendas.
+Para acceder como cliente, solo ingresen el usuario y password que indicaron al registrarse
+
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.

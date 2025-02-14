@@ -1,8 +1,10 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { LoginService } from '../services/login.service';
-import { HttpResponse } from '@angular/common/http';
+import { ClientesService } from '../services/clientes.service';
+import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { Clientes } from '../models/clientes';
+import { catchError, map, Observable } from 'rxjs';
 
 @Component({
   selector: 'app-login',
@@ -10,8 +12,15 @@ import { Clientes } from '../models/clientes';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
-  
-  constructor(private loginService: LoginService, private router: Router) {
+  showError = false;
+  clienteselected: Clientes = {
+    apellidos: '',
+    direccion: '',
+    nombre: '',
+    password: '',
+    usuario: '',
+  }
+  constructor(private loginService: LoginService, private clientesService: ClientesService, private router: Router) {
   }
   ngOnInit() {
   }
@@ -23,13 +32,38 @@ export class LoginComponent {
       this.router.navigate(['admin']);
     }
     else {
-      await this.loginService.login(usuario, password).subscribe(
-        (data: Clientes) => {
-          clienteLogged = { ...data};
-          localStorage.setItem('userLogged', clienteLogged.usuario)
-          this.router.navigate(['principal']);
-        }
-      );
+      
+        await this.loginService.login(usuario, password).subscribe(
+          (data: Clientes) => {
+            console.log(data.nombre);
+            if (data.nombre != undefined) {
+              clienteLogged = { ...data};
+              localStorage.setItem('userLogged', clienteLogged.usuario);
+              localStorage.setItem('clienteId', clienteLogged.id ? clienteLogged.id : '');
+              localStorage.setItem('nombre', clienteLogged.nombre + " " + clienteLogged.apellidos)
+              this.router.navigate(['principal']);
+            }
+            else{
+              this.showError = true;
+            }          
+          }
+        )
     }
   }
+
+  async crearCliente() {
+    await this.clientesService.postCliente(this.clienteselected).subscribe(
+      (data: Clientes) => {
+        this.emptyData();
+      }
+    ) 
+  }
+
+  emptyData() {
+    this.clienteselected.apellidos = '';
+    this.clienteselected.direccion = '';
+    this.clienteselected.nombre = '';
+    this.clienteselected.password = '';
+    this.clienteselected.usuario = '';
+  };
 }

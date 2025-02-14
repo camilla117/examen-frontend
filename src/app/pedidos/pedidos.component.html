@@ -1,1 +1,49 @@
-<p>pedidos works!</p>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.0-beta1/css/bootstrap.min.css">
+<div class="row">
+    <div class="container col">
+        <div class="card mb-3" style="max-width: 540px;" *ngFor="let pedido of pedidos; index as i">
+          <div class="row g-0">
+            <div class="col-sm-4 position-relative">
+              <img [src]="pedido.articulo.imagen" class="card-img fit-cover w-100 h-100" alt="...">
+            </div>
+      
+            <div class="col-sm-8">
+              <div class="card-body">
+                <h5 class="card-title">
+                    {{pedido.articulo.nombre}}
+                </h5>
+      
+                <p class="card-text">{{pedido.articulo.descripcion}}</p>
+                <span class="badge rounded-pill bg-primary">Cantidad: {{pedido.clienteArticulo.cantidad}}</span>
+                <span class="badge rounded-pill bg-success">Total: ${{pedido.clienteArticulo.total}}</span>
+              </div>
+      
+              <div class="card-footer text-end text-muted">
+                <button (click)="removeItem(pedido.articulo.id, i)" style="background-color: transparent; border: none;"><i style="font-size: 20px; color: red;" class="bi bi-trash-fill"></i></button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="container col">
+        <div class="card" style="max-width: 400px;">
+          <div class="row g-0">
+      
+            <div class="col">
+              <div class="card-body">
+                <h5 class="card-title">
+                  <a>{{nombreCliente}}</a>
+                </h5>
+      
+                <p class="card-text">El total de su compra es de:</p>
+                <span class="badge rounded-pill bg-success">${{totalCompra}}</span>
+              </div>
+      
+              <div class="card-footer text-end text-muted">
+                <button [disabled]="!disabled" (click)="comprar()" class="btn btn-success" style="background-color: green; border: none;"><i style="font-size: 20px;" class="bi bi-shop"></i> Comprar</button>
+              </div>
+            </div>
+          </div>
+        </div>
+</div>
+  

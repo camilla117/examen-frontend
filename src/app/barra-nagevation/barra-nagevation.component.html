@@ -6,11 +6,27 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-          <li class="nav-item" *ngIf="showAdminBoard"><a [routerLink]="['admin']"><span class="bi bi-gear"></span></a></li>
-          <li class="nav-item"  *ngIf="isLoggedIn"><a [routerLink]="['catalogo']"><span class="bi bi-bag-fill" aria-hidden="true"></span></a></li>
-          <li class="nav-item"  *ngIf="isLoggedIn"><a [routerLink]="['pedidos']"><span class="bi bi-cart-fill" aria-hidden="true"></span></a></li>
+          <li class="nav-item" *ngIf="showAdminBoard">
+            <button [routerLink]="['admin']" style=" width: 70%;background-color: transparent; border: none;" data-bs-toggle="tooltip" data-bs-placement="top" title="Dashboard">
+              <span class="bi bi-gear"></span>
+            </button>
+          </li>
+          <li class="nav-item"  *ngIf="isLoggedIn">
+            <button [routerLink]="['catalogo']" style=" width: 70%;background-color: transparent; border: none;" data-bs-toggle="tooltip" data-bs-placement="top" title="Catalogo">
+              <span class="bi bi-bag-fill" aria-hidden="true"></span>
+            </button>
+          </li>
+          <li class="nav-item"  *ngIf="isLoggedIn">
+            <button [routerLink]="['pedidos']" style=" width: 70%;background-color: transparent; border: none;" data-bs-toggle="tooltip" data-bs-placement="top" title="Pedidos">
+              <span class="bi bi-cart-fill" aria-hidden="true"></span>
+            </button>
+          </li>
           
-          <li class="nav-item"  *ngIf="isLoggedIn || showAdminBoard"><a [routerLink]="['/']"><span class="bi bi-box-arrow-right" aria-hidden="true"></span></a></li>
+          <li (click)="logout()" class="nav-item"  *ngIf="isLoggedIn || showAdminBoard">
+            <button style=" width: 70%;background-color: transparent; border: none;" data-bs-toggle="tooltip" data-bs-placement="top" title="Logout">
+              <span class="bi bi-box-arrow-right" aria-hidden="true"></span>
+            </button>
+          </li>
         
         </ul>
       </div>

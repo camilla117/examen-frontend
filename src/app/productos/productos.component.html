@@ -1,1 +1,27 @@
-<p>productos works!</p>
+<div class="container">
+    <div style="width: 30%;">
+      <Label for="dataList" class="form-label">Tienda</Label>
+      <select class="form-select" aria-label="Default select example" [(ngModel)]="tiendaSelected" (change)="getAllArticulos()">
+        <option *ngFor="let tienda of tiendas" [value]="tienda.id">{{tienda.sucursal}}</option>
+      </select>
+    </div>
+    <div class="row row-cols-5 g-5"  style="margin-top: 1px;">
+        <div class="col" *ngFor="let articulo of articulos; index as i">
+            <div *ngIf="articulo.stock > 0" class="card h-100" style="width: 15rem;" >
+                <img [src]="articulo.imagen" class="card-img-top" alt="...">
+                <div class="card-body">
+                  <h5 class="card-title">{{articulo.nombre}}</h5>
+                  <p class="card-text">{{articulo.descripcion}}</p>
+                  <p class="card-text">Precio: ${{articulo.precio}}</p>
+                  <p class="card-text">Stock: {{articulo.stock}}</p>
+                  <label for="cantidad">Cantidad</label>
+                  <input [(ngModel)]="cantidadArticulo[i]" type="number" id="cantidad">
+                  <p></p>
+                  <button (click)="anadirCarrito(articulo.id, i)" class="btn btn-primary">Añadir al carrito</button>
+                </div>
+              </div>
+        </div>
+        
+    </div>
+  </div>
+  

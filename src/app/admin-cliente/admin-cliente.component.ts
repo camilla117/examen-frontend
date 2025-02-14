@@ -74,7 +74,6 @@ export class AdminClienteComponent {
         }
       )
     }
-    
   }
 
   async editarCliente(id: any) {

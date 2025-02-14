@@ -2,13 +2,14 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders} from '@angular/common/http'
 import { Clientes } from '../models/clientes';
 import { Observable } from 'rxjs';
+import * as myGlobals from '../globals'
 
 @Injectable({
   providedIn: 'root'
 })
 export class ClientesService {
 
-  readonly url = "http://localhost:5098/api/Clientes/";
+  readonly url = myGlobals.APIUrl + "Clientes/";
   constructor(private http: HttpClient) { }
 
   getAllClientes() {

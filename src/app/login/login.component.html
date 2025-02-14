@@ -1,23 +1,66 @@
-<div class="container-fluid c-login">
-    <div class="row">
-      <div class="col-lg-3 col-centered table-bordered ">
-        <div class="wrath-content-box"> <span>Inicia Sesión</span> </div>
-        <div class="wrath-content-box">
-          <div class="form-group">
-            <input type="text" class="form-control" placeholder="Usuario" #usuario/>
-          </div>
-          <div class="form-group">
-            <input type="password" class="form-control" placeholder="Contraseña" #password/>
-          </div>
-          <div class="col-sm-6"><p ></p></div>
-          <div class="col-sm-6">
-            <div class="form-group text-right">
-              <input class="btn btn-success btn-sm form-control" value="Ingresar" (click)="iniciarSesion(usuario.value, password.value)"/>
+
+<div>
+    <div class="wrapper">
+        <div class="logo">
+            <img src="../../assets/logo.png" alt="">
+        </div>
+        <div class="text-center mt-4 name">
+            Mi Carrito
+        </div>
+        <form class="p-3 mt-3">
+            <div class="form-field d-flex align-items-center">
+                <span class="bi bi-person-fill"></span>
+                <input type="text" class="form-control" placeholder="Usuario" #usuario/>
+            </div>
+            <div class="form-field d-flex align-items-center">
+                <span class="bi bi-lock-fill"></span>
+                <input type="password" class="form-control" placeholder="Contraseña" #password/>
+            </div>
+            <input class="btn btn-success btn-sm form-control mt-3" value="Ingresar" (click)="iniciarSesion(usuario.value, password.value)"/>
+            <input class="btn btn-success btn-sm form-control mt-3" value="Registrarse" data-bs-toggle="modal" data-bs-target="#staticBackdrop"/>
+            <div class="row">
+                <div class="col-md-12">
+                  <div *ngIf="showError" class="alert alert-danger">Credenciales Inválidas!</div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="container">
+        <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h1 class="modal-title fs-5" id="staticBackdropLabel">Registro</h1>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <div>
+                    <div class="mb-3">
+                        <input [(ngModel)]="clienteselected.nombre" class="form-control me-2" id="Nombre" type="text" placeholder="Nombre">
+                    </div>
+                    <div class="mb-3">
+                        <input [(ngModel)]="clienteselected.apellidos" class="form-control me-2" id="Descripcion" type="text" placeholder="Apellidos">
+                    </div>
+                    <div class="mb-3">
+                        <input [(ngModel)]="clienteselected.usuario" class="form-control me-2" type="text" placeholder="Usuario">
+                    </div>
+                    <div class="mb-3">
+                        <input [(ngModel)]="clienteselected.password" class="form-control me-2" type="password" placeholder="Password">
+                    </div>
+                    <div class="mb-3">
+                        <input [(ngModel)]="clienteselected.direccion" class="form-control me-2" type="text" placeholder="Direccion">
+                    </div>
+                    
+                </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="emptyData()">Close</button>
+                  <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="crearCliente()">Enviar</button>
+                </div>
+              </div>
             </div>
           </div>
-          <div class="clearfix"></div>
-        </div>
-      </div>
     </div>
-  </div>
+    
+</div>
   
