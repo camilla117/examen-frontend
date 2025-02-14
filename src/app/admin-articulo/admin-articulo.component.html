@@ -1,0 +1,97 @@
+<div class="container">
+  <div style="width: 30%;">
+    <Label for="dataList" class="form-label">Tienda</Label>
+    <select class="form-select" aria-label="Default select example" [(ngModel)]="tiendaSelected" (change)="getAllArticulos()">
+      <option *ngFor="let tienda of tiendas" [value]="tienda.id">{{tienda.sucursal}}</option>
+    </select >
+  </div>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>
+                    <button (click)="modalTitle = 'Añadir Articulo'" type="button" style="background-color: transparent; border: none;" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                    <i style="color: blue;" class="bi bi-plus-lg"></i></button></th>
+                <th scope="col">Nombre</th>
+                <th scope="col">Descripcion</th>
+                <th scope="col">Precio</th>
+                <th scope="col">Stock</th>
+                <th scope="col">Opciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let articulo of articulos">
+                <th></th>
+                <th>{{articulo.nombre}}</th>
+                <th>{{articulo.descripcion}}</th>
+                <th>{{articulo.precio}}</th>
+                <th>{{articulo.stock}}</th>
+                <th>
+                    <button style="background-color: transparent; border: none;" (click)="editarArticulo(articulo.id)" data-bs-toggle="modal" data-bs-target="#staticBackdrop"><i style="color: green;"class="bi bi-pencil-fill"></i></button>
+                    <button style="background-color: transparent; border: none;"  (click)="setEliminarArticulo(articulo.id)" data-bs-toggle="modal" data-bs-target="#staticBackdropEliminar"><i style="color: red;" class="bi bi-trash-fill" aria-hidden="true"></i></button>
+                </th>
+            </tr>
+        </tbody>
+    </table>
+  
+  <!-- Modal -->
+  <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="staticBackdropLabel">{{modalTitle}}</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div>
+            <div class="mb-3">
+                <input [(ngModel)]="articuloSelected.nombre" class="form-control me-2" id="Nombre" type="text" placeholder="Nombre">
+            </div>
+            <div class="mb-3">
+                <input [(ngModel)]="articuloSelected.descripcion" class="form-control me-2" id="Descripcion" type="text" placeholder="Descripcion">
+            </div>
+            <div class="mb-3">
+                <input [(ngModel)]="articuloSelected.precio" class="form-control me-2" type="number" placeholder="Precio">
+            </div>
+            <div class="mb-3">
+                <input [(ngModel)]="articuloSelected.stock" class="form-control me-2" type="number" placeholder="Stock">
+            </div>
+            <div class="mb-3">
+                <input (change)="selectedFile($event)" [(ngModel)]="imagenSelected" class="form-control me-2" type="file" placeholder="Imagen" accept="image/png, image/gif, image/jpeg">
+            </div>
+            <div class="mb-3">
+                <img width="50%" height="50%" [src]="articuloSelected.imagen">
+            </div>
+            
+        </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="emptyData()">Close</button>
+          <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="crearArticulo()">Enviar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="staticBackdropEliminar" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabelEliminar" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="staticBackdropLabel">{{modalTitle}}</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div>
+            <div class="mb-3">
+                ¿Seguro que desea eliminar esta articulo de forma permanente?
+            </div>
+        </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="emptyData()">Close</button>
+          <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="eliminarArticulo()">Aceptar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

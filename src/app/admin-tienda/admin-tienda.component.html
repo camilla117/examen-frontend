@@ -1,0 +1,74 @@
+<div class="container">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>
+                    <button (click)="modalTitle = 'Añadir tienda'" type="button" style="background-color: transparent; border: none;" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                    <i style="color: blue;" class="bi bi-plus-lg"></i></button></th>
+                <th scope="col">Sucursal</th>
+                <th scope="col">Direccion</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let tienda of tiendas">
+                <th></th>
+                <th>{{tienda.sucursal}}</th>
+                <th>{{tienda.direccion}}</th>
+                <th>
+                    <button style="background-color: transparent; border: none;" (click)="editartienda(tienda.id)" data-bs-toggle="modal" data-bs-target="#staticBackdrop"><i style="color: green;"class="bi bi-pencil-fill"></i></button>
+                    <button style="background-color: transparent; border: none;"  (click)="setEliminartienda(tienda.id)" data-bs-toggle="modal" data-bs-target="#staticBackdropEliminar"><i style="color: red;" class="bi bi-trash-fill" aria-hidden="true"></i></button>
+                </th>
+            </tr>
+        </tbody>
+    </table>
+  
+  <!-- Modal -->
+  <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="staticBackdropLabel">{{modalTitle}}</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div>
+            <div class="mb-3">
+                <input [(ngModel)]="tiendaSelected.sucursal" class="form-control me-2" id="Nombre" type="text" placeholder="Sucursal">
+            </div>
+            <div class="mb-3">
+                <input [(ngModel)]="tiendaSelected.direccion" class="form-control me-2" id="Descripcion" type="text" placeholder="Direccion">
+            </div>
+            
+        </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="emptyData()">Close</button>
+          <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="creartienda()">Enviar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="staticBackdropEliminar" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabelEliminar" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="staticBackdropLabel">{{modalTitle}}</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div>
+            <div class="mb-3">
+                ¿Seguro que desea eliminar esta tienda de forma permanente?
+            </div>
+        </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="emptyData()">Close</button>
+          <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="eliminartienda()">Aceptar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
